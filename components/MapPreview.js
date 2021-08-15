@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 import ENV from '../env';
 
 const MapPreview = props => {
   let imagePreviewUrl;
 
-  console.log(props.location);
   if (props.location) {
     imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${
       props.location.lat
@@ -18,13 +17,13 @@ const MapPreview = props => {
   }
 
   return (
-    <View style={{ ...styles.mapPreview, ...props.style }}>
+    <TouchableOpacity onPress={props.onPress} style={{ ...styles.mapPreview, ...props.style }}>
       {props.location ? (
         <Image style={styles.mapImage} source={{ uri: imagePreviewUrl }} />
       ) : (
         props.children
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 
